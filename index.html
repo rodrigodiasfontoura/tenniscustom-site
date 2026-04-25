@@ -266,46 +266,35 @@
     pointer-events: none;
   }
 
-  /* Spec strip */
+  /* Offline badge */
   .spec-strip {
-    max-width: 1280px;
-    margin: 80px auto 0;
+    max-width: 720px;
+    margin: 64px auto 0;
     padding: 0 32px;
     animation: fadeInUp 0.8s ease 0.6s backwards;
   }
 
-  .spec-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--border-soft);
-    border: 1px solid var(--border-soft);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .spec-cell {
-    background: var(--bg);
-    padding: 24px 20px;
-    text-align: center;
-  }
-
-  .spec-cell .num {
-    font-family: 'Fraunces', serif;
-    font-size: 32px;
-    font-weight: 400;
-    color: var(--primary);
-    letter-spacing: -0.02em;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .spec-cell .label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
+  .offline-badge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 24px;
+    background: rgba(56, 189, 248, 0.06);
+    border: 1px solid var(--border);
+    border-radius: 14px;
     color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .offline-badge svg {
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .offline-badge strong {
+    color: var(--text);
+    font-weight: 600;
   }
 
   /* Sections */
@@ -519,9 +508,9 @@
   }
 
   .footer-links {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 12px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .footer-links a {
@@ -561,13 +550,13 @@
   @media (max-width: 900px) {
     .features { grid-template-columns: 1fr; }
     .audience-list { grid-template-columns: 1fr; gap: 16px; }
-    .spec-grid { grid-template-columns: repeat(2, 1fr); }
     header { padding: 20px; }
     .hero { padding: 48px 20px 80px; }
     section { padding: 80px 20px; }
     .for-who { padding: 80px 20px; }
     .footer-inner { flex-direction: column; }
     .footer-bottom { flex-direction: column; gap: 8px; padding-left: 20px; padding-right: 20px; }
+    .offline-badge { font-size: 13px; padding: 16px 20px; }
   }
 
   @media (max-width: 480px) {
@@ -579,13 +568,13 @@
 <body>
 
 <header>
-  <a href="/" class="logo">
+  <a href="./index.html" class="logo">
     <span class="logo-mark">T</span>
     Tennis Custom
   </a>
   <div class="lang-switch">
-    <a href="/" class="active">PT</a>
-    <a href="/en/">EN</a>
+    <a href="./index.html" class="active">PT</a>
+    <a href="./en/index.html">EN</a>
   </div>
 </header>
 
@@ -593,7 +582,7 @@
   <section class="hero">
     <div class="eyebrow">Em breve na App Store</div>
     <h1>Customize sua raquete<br><em>com precisão real.</em></h1>
-    <p>Modelo físico baseado em distribuição de massa. Veja exatamente como cada grama de chumbo, cada acessório, cada ajuste impacta peso, balanço, swingweight e twistweight.</p>
+    <p>Veja exatamente como cada grama de chumbo, cada acessório e cada ajuste impacta peso, balanço, swingweight e twistweight.</p>
     <div class="cta-row">
       <a href="#features" class="btn-primary">
         Conhecer o app
@@ -607,23 +596,9 @@
   </section>
 
   <div class="spec-strip">
-    <div class="spec-grid">
-      <div class="spec-cell">
-        <div class="num">21</div>
-        <div class="label">Raquetes na biblioteca</div>
-      </div>
-      <div class="spec-cell">
-        <div class="num">5</div>
-        <div class="label">Posições de chumbo</div>
-      </div>
-      <div class="spec-cell">
-        <div class="num">0.5g</div>
-        <div class="label">Precisão de ajuste</div>
-      </div>
-      <div class="spec-cell">
-        <div class="num">100%</div>
-        <div class="label">Cálculo offline</div>
-      </div>
+    <div class="offline-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/><path d="M9 12l2 2 4-4"/></svg>
+      <span><strong>100% offline.</strong> Todos os cálculos rodam no seu dispositivo. Sem nuvem, sem rastreamento.</span>
     </div>
   </div>
 
@@ -639,7 +614,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
         <h3>Smart Match</h3>
-        <p>Encontre automaticamente o melhor setup para atingir suas especificações alvo. Algoritmo de busca com 25g de chumbo distribuídos em 5 posições.</p>
+        <p>Encontre automaticamente o melhor setup para atingir suas especificações alvo, em segundos.</p>
       </div>
 
       <div class="feature">
@@ -679,7 +654,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
         </div>
         <h3>Biblioteca de raquetes</h3>
-        <p>Acesse 21 modelos populares com specs reais ou crie os seus. Babolat, Head, Wilson, Yonex, Tecnifibre, Solinco.</p>
+        <p>Acesse modelos populares com specs reais ou crie os seus. Babolat, Head, Wilson, Yonex, Tecnifibre, Solinco.</p>
       </div>
     </div>
   </section>
@@ -721,25 +696,21 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href="/" class="logo">
+      <a href="./index.html" class="logo">
         <span class="logo-mark">T</span>
         Tennis Custom
       </a>
       <p>Customize sua raquete com precisão de física real. Desenvolvido por jogadores, para jogadores.</p>
     </div>
     <div class="footer-links">
-      <a href="/termos.html">Termos de Uso</a>
-      <a href="/terms.html">Terms of Use</a>
-      <a href="/privacidade.html">Privacidade</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/suporte.html">Suporte</a>
-      <a href="/support.html">Support</a>
+      <a href="./termos.html">Termos de Uso</a>
+      <a href="./privacidade.html">Privacidade</a>
+      <a href="./suporte.html">Suporte</a>
       <a href="mailto:tenniscustom.app@gmail.com">Contato</a>
-      <a href="mailto:tenniscustom.app@gmail.com">Contact</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Tennis Custom · Rodrigo Fontoura</span>
+    <span>© 2026 Tennis Custom</span>
     <span>tenniscustom.app</span>
   </div>
 </footer>
