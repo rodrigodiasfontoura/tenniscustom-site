@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Tennis Custom — Customize sua raquete com precisão real</title>
-<meta name="description" content="Customize sua raquete de tênis com precisão de física real. Calcule peso, balanço, swingweight e twistweight. Smart Match, Batch Matching e simulador de sensação." />
+<title>Tennis Custom — A raquete perfeita começa nos detalhes</title>
+<meta name="description" content="Calcule peso, balanço, swingweight e twistweight da sua raquete de tênis com precisão real. Smart Match, Batch Matching e simulador de sensação." />
 <meta name="theme-color" content="#0B1320" />
 <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 <link rel="apple-touch-icon" href="./favicon.svg" />
 
 <!-- Open Graph -->
-<meta property="og:title" content="Tennis Custom — Customize sua raquete com precisão real" />
-<meta property="og:description" content="Modelo físico baseado em distribuição de massa. Veja como cada mudança impacta sua raquete." />
+<meta property="og:title" content="Tennis Custom — A raquete perfeita começa nos detalhes" />
+<meta property="og:description" content="Calcule o setup ideal da sua raquete de tênis. Veja como cada ajuste impacta peso, balanço e swingweight." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://tenniscustom.app/" />
 <meta property="og:locale" content="pt_BR" />
@@ -498,6 +498,39 @@
     margin: 0 auto;
   }
 
+  /* Final CTA */
+  .final-cta {
+    text-align: center;
+    padding: 80px 32px 100px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .final-cta .section-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+
+  .final-cta h2 {
+    margin-bottom: 20px;
+  }
+
+  .final-cta p {
+    color: var(--text-dim);
+    font-size: 17px;
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+
+  /* Single CTA centered */
+  .cta-row-single {
+    justify-content: center;
+  }
+
   /* Footer */
   footer {
     border-top: 1px solid var(--border-soft);
@@ -599,13 +632,9 @@
 <main>
   <section class="hero">
     <div class="eyebrow">Disponível na App Store</div>
-    <h1>Customize sua raquete<br><em>com precisão real.</em></h1>
+    <h1>A raquete perfeita<br><em>começa nos detalhes.</em></h1>
     <p>Veja exatamente como cada grama de chumbo, cada acessório e cada ajuste impacta peso, balanço, swingweight e twistweight.</p>
-    <div class="cta-row">
-      <a href="#features" class="btn-primary">
-        Conhecer o app
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
-      </a>
+    <div class="cta-row cta-row-single">
       <a href="https://apps.apple.com/app/id6761192994" target="_blank" rel="noopener" class="app-store-badge" aria-label="Baixar na App Store">
         <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Baixar na App Store" />
       </a>
@@ -708,6 +737,17 @@
     <h2>Desbloqueie o <em>potencial completo.</em></h2>
     <p>Com o upgrade Pro, acesse Smart Match, Batch Matching, twistweight e setups ilimitados. Compra única, sem assinaturas.</p>
   </section>
+
+  <section class="final-cta">
+    <div class="section-tag">Pronto para começar?</div>
+    <h2>Sua próxima raquete <em>já está calculada.</em></h2>
+    <p>Baixe o Tennis Custom agora e descubra o setup ideal para o seu jogo.</p>
+    <div class="cta-row cta-row-single">
+      <a href="https://apps.apple.com/app/id6761192994" target="_blank" rel="noopener" class="app-store-badge" aria-label="Baixar na App Store">
+        <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Baixar na App Store" />
+      </a>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -717,7 +757,7 @@
         <span class="logo-mark">T</span>
         Tennis Custom
       </a>
-      <p>Customize sua raquete com precisão de física real. Desenvolvido por jogadores, para jogadores.</p>
+      <p>A raquete perfeita começa nos detalhes. Desenvolvido por jogadores, para jogadores.</p>
     </div>
     <div class="footer-links">
       <a href="./termos.html">Termos de Uso</a>
