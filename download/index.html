@@ -23,8 +23,8 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
 <meta name="theme-color" content="#0B1320" />
 <meta name="robots" content="noindex, nofollow" />
 
-<!-- Redirect imediato via meta -->
-<meta http-equiv="refresh" content="0;url=https://apps.apple.com/app/id6761192994" />
+<!-- Redirect via meta (com 1s pra Pixel registrar a conversão) -->
+<meta http-equiv="refresh" content="1;url=https://apps.apple.com/app/id6761192994" />
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
@@ -145,10 +145,14 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
   </div>
 
   <script>
-    // Fallback via JS (caso meta refresh não funcione)
+    // Dispara evento de conversão no Meta Pixel antes de redirecionar
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', { content_name: 'App Store redirect' });
+    }
+    // Redirect com pequeno delay pra garantir que o Pixel registre o evento
     setTimeout(function() {
       window.location.href = 'https://apps.apple.com/app/id6761192994';
-    }, 100);
+    }, 400);
   </script>
 </body>
 </html>

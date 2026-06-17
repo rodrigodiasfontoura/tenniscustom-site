@@ -1180,5 +1180,14 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
   </div>
 </footer>
 
+<script>
+  // Dispara evento de conversão no Meta Pixel ao clicar em "Baixar na App Store"
+  document.addEventListener('click', function(e) {
+    var badge = e.target.closest('.app-store-badge');
+    if (badge && typeof fbq === 'function') {
+      fbq('track', 'Lead', { content_name: 'App Store click' });
+    }
+  });
+</script>
 </body>
 </html>
