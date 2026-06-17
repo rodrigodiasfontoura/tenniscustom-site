@@ -711,6 +711,89 @@
     justify-content: center;
   }
 
+  /* Showcase - app screenshots */
+  .showcase {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 120px 32px;
+  }
+
+  .showcase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    margin-bottom: 120px;
+  }
+
+  .showcase-row:last-child { margin-bottom: 0; }
+  .showcase-row.reverse .showcase-text { order: 2; }
+  .showcase-row.reverse .showcase-phone { order: 1; }
+
+  .showcase-text .step-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+
+  .showcase-text h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .showcase-text h3 em { font-style: italic; color: var(--primary); }
+
+  .showcase-text p {
+    color: var(--text-dim);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 440px;
+  }
+
+  .showcase-phone { display: flex; justify-content: center; }
+
+  .phone-frame {
+    position: relative;
+    width: 300px;
+    max-width: 100%;
+    border-radius: 44px;
+    padding: 12px;
+    background: linear-gradient(145deg, #2a3a4f 0%, #161f2e 100%);
+    box-shadow:
+      0 0 0 2px rgba(56, 189, 248, 0.1),
+      0 30px 80px rgba(0, 0, 0, 0.5),
+      0 0 60px rgba(56, 189, 248, 0.08);
+  }
+
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 96px;
+    height: 28px;
+    background: #0a0f1a;
+    border-radius: 100px;
+    z-index: 2;
+  }
+
+  .phone-screen {
+    border-radius: 33px;
+    overflow: hidden;
+    display: block;
+    background: var(--bg);
+  }
+
+  .phone-screen img { width: 100%; display: block; }
+
   footer {
     border-top: 1px solid var(--border-soft);
     padding: 48px 32px 40px;
@@ -785,6 +868,12 @@
     .how { padding: 80px 20px; }
     .testimonials { padding: 80px 20px; }
     .testimonial-grid { grid-template-columns: 1fr; }
+    .showcase { padding: 80px 20px; }
+    .showcase-row { grid-template-columns: 1fr; gap: 32px; margin-bottom: 72px; text-align: center; }
+    .showcase-row .showcase-text, .showcase-row.reverse .showcase-text { order: 2; }
+    .showcase-row .showcase-phone, .showcase-row.reverse .showcase-phone { order: 1; }
+    .showcase-text p { margin-left: auto; margin-right: auto; }
+    .phone-frame { width: 260px; }
   }
 
   @media (max-width: 480px) {
@@ -929,6 +1018,65 @@
       </div>
     </div>
   </div>
+
+  <section class="showcase">
+    <div class="section-header">
+      <div class="section-tag">See it in action</div>
+      <h2>Inside <em>the app.</em></h2>
+    </div>
+
+    <div class="showcase-row">
+      <div class="showcase-text">
+        <div class="step-tag">Calculator</div>
+        <h3>Start with <em>real measurements.</em></h3>
+        <p>Choose a racquet from the library or enter your own measurements. See reference weight, balance, swingweight, and twistweight in one place.</p>
+      </div>
+      <div class="showcase-phone">
+        <div class="phone-frame">
+          <div class="phone-screen"><img src="../screens/calc-en.jpg" alt="Tennis Custom calculator screen" loading="lazy" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="showcase-row reverse">
+      <div class="showcase-text">
+        <div class="step-tag">Feel per stroke</div>
+        <h3>Feel the impact <em>before you play.</em></h3>
+        <p>Every adjustment recalculates power, control, spin, stability, and maneuverability in real time. See exactly how your racquet will behave.</p>
+      </div>
+      <div class="showcase-phone">
+        <div class="phone-frame">
+          <div class="phone-screen"><img src="../screens/feel-en.jpg" alt="Tennis Custom feel simulator" loading="lazy" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="showcase-row">
+      <div class="showcase-text">
+        <div class="step-tag">Smart Match</div>
+        <h3>Match any racquet <em>with precision.</em></h3>
+        <p>Enter the reference racquet and the target. The app finds the exact lead combination to reach a 100% match — with professional quality.</p>
+      </div>
+      <div class="showcase-phone">
+        <div class="phone-frame">
+          <div class="phone-screen"><img src="../screens/match-en.jpg" alt="Smart Match result with 100% quality" loading="lazy" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="showcase-row reverse">
+      <div class="showcase-text">
+        <div class="step-tag">Share setup</div>
+        <h3>Show your setup <em>to everyone.</em></h3>
+        <p>Generate a complete image of your setup with all specs and a QR code. Share it with your stringer, coach, or other players in a single tap.</p>
+      </div>
+      <div class="showcase-phone">
+        <div class="phone-frame">
+          <div class="phone-screen"><img src="../screens/share-en.jpg" alt="Tennis Custom setup sharing screen" loading="lazy" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <div class="for-who">
     <div class="for-who-inner">
