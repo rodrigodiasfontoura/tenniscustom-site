@@ -899,6 +899,26 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
 </style>
 </head>
 <body>
+<!-- Language suggestion banner -->
+<div id="lang-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#1E293B;border-bottom:1px solid rgba(255,255,255,0.06);padding:10px 16px;text-align:center;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#F1F5F9;">
+  <span>Este site também está disponível em português. </span>
+  <a href="../index.html" style="color:#38BDF8;text-decoration:none;font-weight:600;">Ver em português &rarr;</a>
+  <button onclick="document.getElementById('lang-banner').style.display='none';sessionStorage.setItem('langBannerDismissed','1');" aria-label="Fechar" style="background:none;border:none;color:#94A3B8;font-size:18px;cursor:pointer;margin-left:14px;vertical-align:middle;line-height:1;">&times;</button>
+</div>
+<script>
+  (function(){
+    try{
+      var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      var dismissed = sessionStorage.getItem('langBannerDismissed');
+      // mostra só se navegador FOR português e usuário não fechou
+      if(lang.indexOf('pt') === 0 && !dismissed){
+        var b = document.getElementById('lang-banner');
+        if(b){ b.style.display='block'; }
+      }
+    }catch(e){}
+  })();
+</script>
+
 
 <header>
   <a href="./index.html" class="logo">
