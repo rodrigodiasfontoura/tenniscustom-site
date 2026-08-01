@@ -353,7 +353,7 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
   }
   .google-play-badge:hover { transform: translateY(-2px); }
   .google-play-badge img {
-    height: 56px;
+    height: 54px;
     display: block;
   }
 
@@ -682,7 +682,16 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
 
   /* Single CTA centered */
   .cta-row-single {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .badge-group {
+    display: flex;
+    gap: 16px;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   /* How it works */
@@ -977,7 +986,7 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
     .app-store-badge {
       filter: drop-shadow(0 8px 28px rgba(56, 189, 248, 0.35));
     }
-    .google-play-badge img { height: 64px; }
+    .google-play-badge img { height: 62px; }
     .google-play-badge {
       filter: drop-shadow(0 8px 28px rgba(56, 189, 248, 0.35));
     }
@@ -1029,12 +1038,14 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
     <h1>A raquete perfeita<br><em>começa nos detalhes.</em></h1>
     <p>Veja como cada ajuste na sua raquete impacta peso, balanço e swingweight — antes de colar o primeiro chumbo.</p>
     <div class="cta-row cta-row-single">
-      <a href="https://apps.apple.com/app/apple-store/id6761192994?pt=128635517&ct=meta_wimbledon_appstore&mt=8" target="_blank" rel="noopener" class="app-store-badge" aria-label="Baixar na App Store">
-        <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Baixar na App Store" />
-      </a>
-      <a href="https://play.google.com/store/apps/details?id=com.tenniscustom.app&referrer=utm_source%3Dsite%26utm_medium%3Dbadge%26utm_campaign%3Dlaunch" target="_blank" rel="noopener" class="google-play-badge" aria-label="Disponível no Google Play">
-        <img src="./screens/google-play-badge.svg" alt="Disponível no Google Play" />
-      </a>
+      <div class="badge-group">
+        <a href="https://apps.apple.com/app/apple-store/id6761192994?pt=128635517&ct=meta_wimbledon_appstore&mt=8" target="_blank" rel="noopener" class="app-store-badge" aria-label="Baixar na App Store">
+          <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Baixar na App Store" />
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.tenniscustom.app&referrer=utm_source%3Dsite%26utm_medium%3Dbadge%26utm_campaign%3Dlaunch" target="_blank" rel="noopener" class="google-play-badge" aria-label="Disponível no Google Play">
+          <img src="./screens/google-play-badge.svg" alt="Disponível no Google Play" />
+        </a>
+      </div>
       <p class="cta-microcopy">Grátis · iOS e Android</p>
     </div>
   </section>
@@ -1267,12 +1278,14 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
     <h2>Sua próxima raquete <em>já está calculada.</em></h2>
     <p>Baixe o Tennis Custom agora e descubra o setup ideal para o seu jogo.</p>
     <div class="cta-row cta-row-single">
-      <a href="https://apps.apple.com/app/apple-store/id6761192994?pt=128635517&ct=meta_wimbledon_appstore&mt=8" target="_blank" rel="noopener" class="app-store-badge" aria-label="Baixar na App Store">
-        <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Baixar na App Store" />
-      </a>
-      <a href="https://play.google.com/store/apps/details?id=com.tenniscustom.app&referrer=utm_source%3Dsite%26utm_medium%3Dbadge%26utm_campaign%3Dlaunch" target="_blank" rel="noopener" class="google-play-badge" aria-label="Disponível no Google Play">
-        <img src="./screens/google-play-badge.svg" alt="Disponível no Google Play" />
-      </a>
+      <div class="badge-group">
+        <a href="https://apps.apple.com/app/apple-store/id6761192994?pt=128635517&ct=meta_wimbledon_appstore&mt=8" target="_blank" rel="noopener" class="app-store-badge" aria-label="Baixar na App Store">
+          <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Baixar na App Store" />
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.tenniscustom.app&referrer=utm_source%3Dsite%26utm_medium%3Dbadge%26utm_campaign%3Dlaunch" target="_blank" rel="noopener" class="google-play-badge" aria-label="Disponível no Google Play">
+          <img src="./screens/google-play-badge.svg" alt="Disponível no Google Play" />
+        </a>
+      </div>
     </div>
   </section>
 </main>
