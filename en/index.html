@@ -60,7 +60,7 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
   "@context": "https://schema.org",
   "@type": "MobileApplication",
   "name": "Tennis Custom",
-  "operatingSystem": "iOS",
+  "operatingSystem": "iOS, Android",
   "applicationCategory": "SportsApplication",
   "url": "https://tenniscustom.app/en/",
   "downloadUrl": "https://apps.apple.com/app/id6761192994",
@@ -338,6 +338,18 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
 
   .app-store-badge:hover {
     transform: translateY(-2px);
+  }
+
+  .google-play-badge {
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.25s ease;
+    text-decoration: none;
+  }
+  .google-play-badge:hover { transform: translateY(-2px); }
+  .google-play-badge img {
+    height: 56px;
+    display: block;
   }
 
   /* Offline badge */
@@ -905,6 +917,10 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
     .app-store-badge {
       filter: drop-shadow(0 8px 28px rgba(56, 189, 248, 0.35));
     }
+    .google-play-badge img { height: 64px; }
+    .google-play-badge {
+      filter: drop-shadow(0 8px 28px rgba(56, 189, 248, 0.35));
+    }
     .spec-strip { margin-top: 32px; }
   }
 
@@ -949,14 +965,17 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
 
 <main>
   <section class="hero">
-    <div class="eyebrow">Available on the App Store</div>
+    <div class="eyebrow">Available for iOS and Android</div>
     <h1>The perfect racquet<br><em>starts in the details.</em></h1>
     <p>See how every adjustment to your racquet impacts weight, balance, and swingweight — before you add a single strip of lead.</p>
     <div class="cta-row cta-row-single">
       <a href="https://apps.apple.com/app/apple-store/id6761192994?pt=128635517&ct=meta_wimbledon_appstore&mt=8" target="_blank" rel="noopener" class="app-store-badge" aria-label="Download on the App Store">
         <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store" />
       </a>
-      <p class="cta-microcopy">Free · iPhone · App Store</p>
+      <a href="https://play.google.com/store/apps/details?id=com.tenniscustom.app&referrer=utm_source%3Dsite%26utm_medium%3Dbadge%26utm_campaign%3Dlaunch" target="_blank" rel="noopener" class="google-play-badge" aria-label="Get it on Google Play">
+        <img src="../screens/google-play-badge.svg" alt="Get it on Google Play" />
+      </a>
+      <p class="cta-microcopy">Free · iOS and Android</p>
     </div>
   </section>
 
@@ -1167,12 +1186,12 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
       <div class="testimonial">
         <div class="stars">★★★★★</div>
         <p class="quote">"Simply a must-have for anyone who loves tennis! It turns racquet customization into something easy, professional, and extremely precise."</p>
-        <div class="author">Lighton7 · App Store</div>
+        <div class="author">Lighton7 · user</div>
       </div>
       <div class="testimonial">
         <div class="stars">★★★★★</div>
         <p class="quote">"Tennis Custom solves this simply and completely. The calculator is incredible — you see in real time how each adjustment impacts the racquet. Totally worth it."</p>
-        <div class="author">Palomamcf · App Store</div>
+        <div class="author">Palomamcf · user</div>
       </div>
     </div>
   </section>
@@ -1190,6 +1209,9 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
     <div class="cta-row cta-row-single">
       <a href="https://apps.apple.com/app/apple-store/id6761192994?pt=128635517&ct=meta_wimbledon_appstore&mt=8" target="_blank" rel="noopener" class="app-store-badge" aria-label="Download on the App Store">
         <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store" />
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.tenniscustom.app&referrer=utm_source%3Dsite%26utm_medium%3Dbadge%26utm_campaign%3Dlaunch" target="_blank" rel="noopener" class="google-play-badge" aria-label="Get it on Google Play">
+        <img src="../screens/google-play-badge.svg" alt="Get it on Google Play" />
       </a>
     </div>
   </section>
@@ -1220,9 +1242,13 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
 <script>
   // Dispara evento de conversão no Meta Pixel ao clicar em "Baixar na App Store"
   document.addEventListener('click', function(e) {
-    var badge = e.target.closest('.app-store-badge');
-    if (badge && typeof fbq === 'function') {
+    var appleBadge = e.target.closest('.app-store-badge');
+    var googleBadge = e.target.closest('.google-play-badge');
+    if (appleBadge && typeof fbq === 'function') {
       fbq('track', 'Lead', { content_name: 'App Store click' });
+    }
+    if (googleBadge && typeof fbq === 'function') {
+      fbq('track', 'Lead', { content_name: 'Google Play click' });
     }
   });
 </script>
