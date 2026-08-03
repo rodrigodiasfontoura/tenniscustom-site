@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta name="facebook-domain-verification" content="50o7p1eg8yxuvm836azrbsma2uilfc" />
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -23,9 +22,6 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
 <title>Tennis Custom — Baixando…</title>
 <meta name="theme-color" content="#0B1320" />
 <meta name="robots" content="noindex, nofollow" />
-
-<!-- Redirect via meta (com 1s pra Pixel registrar a conversão) -->
-<meta http-equiv="refresh" content="1;url=https://apps.apple.com/app/id6761192994" />
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
@@ -124,6 +120,19 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
 
   .fallback:hover { transform: translateY(-2px); }
 
+  /* Grupo de badges (mostrado no desktop / fallback) */
+  .badges {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .badges a { display: inline-flex; transition: transform 0.2s; text-decoration: none; }
+  .badges a:hover { transform: translateY(-2px); }
+  .badges img { height: 52px; display: block; }
+
   .back {
     display: block;
     margin-top: 24px;
@@ -133,27 +142,81 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
   }
 
   .back:hover { color: #94A3B8; }
+
+  /* estados: por padrão mostra "redirecionando"; desktop mostra escolha */
+  #choose { display: none; }
 </style>
 </head>
 <body>
   <div class="wrap">
     <div class="logo-mark">T</div>
-    <div class="label">Redirecionando…</div>
-    <h1>Abrindo a <em>App Store</em></h1>
-    <p>Se a App Store não abrir automaticamente em alguns segundos, toque no botão abaixo.</p>
-    <a href="https://apps.apple.com/app/id6761192994" class="fallback">Abrir App Store</a>
+
+    <!-- Estado 1: redirecionando (mobile) -->
+    <div id="redirecting">
+      <div class="label">Redirecionando…</div>
+      <h1 id="redirect-title">Abrindo a <em>loja</em></h1>
+      <p>Se a loja não abrir automaticamente em alguns segundos, toque no botão abaixo.</p>
+      <a id="fallback-link" href="#" class="fallback">Abrir loja</a>
+    </div>
+
+    <!-- Estado 2: escolha (desktop / plataforma não detectada) -->
+    <div id="choose">
+      <div class="label">Baixe o app</div>
+      <h1>Tennis Custom para <em>iOS e Android</em></h1>
+      <p>Escolha sua plataforma para baixar o app.</p>
+      <div class="badges">
+        <a id="apple-badge" href="#" target="_blank" rel="noopener" aria-label="Baixar na App Store">
+          <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Baixar na App Store" />
+        </a>
+        <a id="google-badge" href="#" target="_blank" rel="noopener" aria-label="Disponível no Google Play">
+          <img src="../screens/google-play-badge.svg" alt="Disponível no Google Play" />
+        </a>
+      </div>
+    </div>
+
     <a href="/" class="back">Voltar ao site</a>
   </div>
 
   <script>
-    // Dispara evento de conversão no Meta Pixel antes de redirecionar
-    if (typeof fbq === 'function') {
-      fbq('track', 'Lead', { content_name: 'App Store redirect' });
-    }
-    // Redirect com pequeno delay pra garantir que o Pixel registre o evento
-    setTimeout(function() {
-      window.location.href = 'https://apps.apple.com/app/id6761192994';
-    }, 400);
+    (function(){
+      var APP_STORE = 'https://apps.apple.com/app/apple-store/id6761192994?pt=128635517&ct=meta_wimbledon_appstore&mt=8';
+      var GOOGLE_PLAY = 'https://play.google.com/store/apps/details?id=com.tenniscustom.app&referrer=utm_source%3Dsite%26utm_medium%3Dbio%26utm_campaign%3Dlaunch';
+
+      // Preenche os badges do estado de escolha (desktop)
+      document.getElementById('apple-badge').href = APP_STORE;
+      document.getElementById('google-badge').href = GOOGLE_PLAY;
+
+      // Detecção de plataforma
+      function detectPlatform() {
+        var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+        if (/android/i.test(ua)) return 'android';
+        if (/iPhone|iPod|iPad/.test(ua)) return 'ios';
+        // iPad iPadOS 13+ finge ser Mac, mas tem touch
+        if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return 'ios';
+        return 'other';
+      }
+
+      var platform = detectPlatform();
+      var target = platform === 'ios' ? APP_STORE : (platform === 'android' ? GOOGLE_PLAY : null);
+
+      if (target) {
+        // Mobile: dispara Pixel e redireciona
+        var storeName = platform === 'ios' ? 'App Store' : 'Google Play';
+        var titleEl = document.getElementById('redirect-title');
+        if (titleEl) titleEl.innerHTML = 'Abrindo a <em>' + storeName + '</em>';
+        var fb = document.getElementById('fallback-link');
+        if (fb) { fb.href = target; fb.textContent = 'Abrir ' + storeName; }
+
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', { content_name: platform === 'ios' ? 'App Store redirect' : 'Google Play redirect' });
+        }
+        setTimeout(function(){ window.location.href = target; }, 500);
+      } else {
+        // Desktop/outros: mostra a escolha, não redireciona
+        document.getElementById('redirecting').style.display = 'none';
+        document.getElementById('choose').style.display = 'block';
+      }
+    })();
   </script>
 </body>
 </html>
