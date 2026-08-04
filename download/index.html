@@ -157,6 +157,10 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
       <h1 id="redirect-title">Abrindo a <em>loja</em></h1>
       <p>Se a loja não abrir automaticamente em alguns segundos, toque no botão abaixo.</p>
       <a id="fallback-link" href="#" class="fallback">Abrir loja</a>
+      <div id="browser-hint" style="display:none; margin-top:28px; padding:18px 20px; background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.25); border-radius:14px;">
+        <p style="color:#F1F5F9; font-size:14px; margin:0 0 10px; font-weight:500;">O botão não abriu a loja?</p>
+        <p id="browser-hint-text" style="color:#94A3B8; font-size:13px; margin:0; line-height:1.5;">Toque em <strong style="color:#38BDF8;">⋯</strong> no canto superior direito e escolha <strong style="color:#38BDF8;">"Abrir no navegador"</strong>.</p>
+      </div>
     </div>
 
     <!-- Estado 2: escolha (desktop / plataforma não detectada) -->
@@ -222,11 +226,23 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
 
         if (inApp) {
           // Dentro do Instagram/Facebook: NÃO conta com auto-redirect (é bloqueado).
-          // Mostra botão grande e instrução clara pra toque manual.
+          // Mostra botão grande + instrução de "abrir no navegador".
           if (labelEl) labelEl.textContent = 'Quase lá';
           if (titleEl) titleEl.innerHTML = 'Abra a <em>' + storeName + '</em>';
           if (descEl) descEl.textContent = 'Toque no botão abaixo para abrir a loja e baixar o app.';
-          // Ainda tenta o redirect (às vezes passa), mas o botão é o caminho principal
+          // Mostra a dica de "abrir no navegador" (caminho garantido de escape)
+          var hint = document.getElementById('browser-hint');
+          var hintText = document.getElementById('browser-hint-text');
+          if (hint) hint.style.display = 'block';
+          // Adapta a instrução conforme o sistema (menu fica em lugar/nome diferente)
+          if (hintText) {
+            if (platform === 'android') {
+              hintText.innerHTML = 'Toque em <strong style="color:#38BDF8;">\u22EE</strong> no canto superior direito e escolha <strong style="color:#38BDF8;">"Abrir no Chrome"</strong> ou <strong style="color:#38BDF8;">"Abrir no navegador"</strong>.';
+            } else {
+              hintText.innerHTML = 'Toque em <strong style="color:#38BDF8;">\u22EF</strong> no canto superior direito e escolha <strong style="color:#38BDF8;">"Abrir no navegador externo"</strong>.';
+            }
+          }
+          // Ainda tenta o redirect (às vezes passa), mas o botão/dica são o caminho principal
           setTimeout(function(){ try { window.location.href = target; } catch(e){} }, 800);
         } else {
           // Safari/Chrome normal: auto-redirect funciona
