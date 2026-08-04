@@ -107,14 +107,14 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
 
   .fallback {
     display: inline-block;
-    padding: 14px 28px;
+    padding: 18px 40px;
     background: #38BDF8;
     color: #0B1320;
-    border-radius: 12px;
+    border-radius: 14px;
     text-decoration: none;
-    font-weight: 500;
-    font-size: 15px;
-    box-shadow: 0 8px 32px rgba(56, 189, 248, 0.3);
+    font-weight: 600;
+    font-size: 17px;
+    box-shadow: 0 8px 32px rgba(56, 189, 248, 0.4);
     transition: transform 0.2s;
   }
 
@@ -186,31 +186,53 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
       document.getElementById('apple-badge').href = APP_STORE;
       document.getElementById('google-badge').href = GOOGLE_PLAY;
 
+      var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+
       // Detecção de plataforma
       function detectPlatform() {
-        var ua = navigator.userAgent || navigator.vendor || window.opera || '';
         if (/android/i.test(ua)) return 'android';
         if (/iPhone|iPod|iPad/.test(ua)) return 'ios';
-        // iPad iPadOS 13+ finge ser Mac, mas tem touch
         if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return 'ios';
         return 'other';
       }
 
+      // Detecção de navegador in-app (Instagram, Facebook, etc) — bloqueiam auto-redirect
+      function isInApp() {
+        return /Instagram|FBAN|FBAV|FB_IAB|Threads|Line\/|Twitter|TikTok/i.test(ua);
+      }
+
       var platform = detectPlatform();
       var target = platform === 'ios' ? APP_STORE : (platform === 'android' ? GOOGLE_PLAY : null);
+      var inApp = isInApp();
 
       if (target) {
-        // Mobile: dispara Pixel e redireciona
         var storeName = platform === 'ios' ? 'App Store' : 'Google Play';
         var titleEl = document.getElementById('redirect-title');
-        if (titleEl) titleEl.innerHTML = 'Abrindo a <em>' + storeName + '</em>';
+        var labelEl = document.querySelector('#redirecting .label');
+        var descEl = document.querySelector('#redirecting p');
         var fb = document.getElementById('fallback-link');
+
+        // Configura o botão de ação (link real — escapa melhor no clique manual dentro do IG)
         if (fb) { fb.href = target; fb.textContent = 'Abrir ' + storeName; }
 
+        // Dispara o Pixel (conversão)
         if (typeof fbq === 'function') {
           fbq('track', 'Lead', { content_name: platform === 'ios' ? 'App Store redirect' : 'Google Play redirect' });
         }
-        setTimeout(function(){ window.location.href = target; }, 500);
+
+        if (inApp) {
+          // Dentro do Instagram/Facebook: NÃO conta com auto-redirect (é bloqueado).
+          // Mostra botão grande e instrução clara pra toque manual.
+          if (labelEl) labelEl.textContent = 'Quase lá';
+          if (titleEl) titleEl.innerHTML = 'Abra a <em>' + storeName + '</em>';
+          if (descEl) descEl.textContent = 'Toque no botão abaixo para abrir a loja e baixar o app.';
+          // Ainda tenta o redirect (às vezes passa), mas o botão é o caminho principal
+          setTimeout(function(){ try { window.location.href = target; } catch(e){} }, 800);
+        } else {
+          // Safari/Chrome normal: auto-redirect funciona
+          if (titleEl) titleEl.innerHTML = 'Abrindo a <em>' + storeName + '</em>';
+          setTimeout(function(){ window.location.href = target; }, 500);
+        }
       } else {
         // Desktop/outros: mostra a escolha, não redireciona
         document.getElementById('redirecting').style.display = 'none';
