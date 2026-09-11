@@ -58,6 +58,7 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
     display: grid; place-items: center; color: #0B1320;
     font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 22px;
   }
+  .logo-mark-img { width: 48px; height: 48px; border-radius: 12px; display: block; box-shadow: 0 0 28px rgba(56,189,248,0.4); }
   .logo-name { font-family: 'Fraunces', serif; font-weight: 500; font-size: 24px; color: var(--text); letter-spacing: -0.01em; }
   .tagline { font-size: 15px; color: var(--text-dim); max-width: 340px; margin: 0 auto; }
   .download {
@@ -100,7 +101,7 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
     transition: background 0.2s, border-color 0.2s, transform 0.2s;
   }
   .partnership:hover { background: rgba(56,189,248,0.06); border-color: var(--primary); transform: translateY(-1px); }
-  .partnership-icon { font-size: 16px; }
+  .partnership-logo { width: 22px; height: 22px; border-radius: 6px; }
   .partnership-text {
     font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--text);
@@ -122,7 +123,7 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
   <div class="wrap">
     <div class="top">
       <a href="/" class="logo">
-        <span class="logo-mark">T</span>
+        <img src="./logos/app-icon.png" alt="Tennis Custom" class="logo-mark-img" />
         <span class="logo-name">Tennis Custom</span>
       </a>
       <p class="tagline">Calcule o efeito de chumbo, cordas e acessórios na sua raquete.</p>
@@ -167,7 +168,7 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
     </div>
 
     <a href="mailto:partnership@tenniscustom.app" class="partnership">
-      <span class="partnership-icon">&#9993;</span>
+      <img src="./logos/app-icon.png" alt="" class="partnership-logo" />
       <span class="partnership-text">Partnership <span class="partnership-sub">— seja um parceiro</span></span>
     </a>
 
