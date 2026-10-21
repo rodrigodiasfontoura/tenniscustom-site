@@ -144,28 +144,28 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
     <div class="divider"><span>Parceiros</span></div>
 
     <div class="partners">
-      <a href="https://www.prospin.com.br/?coupon_code=TennisCustom10" target="_blank" rel="noopener" class="partner">
+      <a href="https://www.prospin.com.br/?coupon_code=TennisCustom10" target="_blank" rel="noopener" class="partner" data-partner="pro_spin">
         <img src="./logos/prospin.png" alt="Pró Spin" class="partner-logo" />
         <div class="partner-foot">
           <span class="partner-desc">Equipamentos de tênis &middot; 10% OFF com TennisCustom10</span>
           <span class="arrow">&rarr;</span>
         </div>
       </a>
-      <a href="https://toroline.com.br" target="_blank" rel="noopener" class="partner">
+      <a href="https://toroline.com.br" target="_blank" rel="noopener" class="partner" data-partner="toroline">
         <img src="./logos/toroline.png" alt="Toroline Brasil" class="partner-logo" />
         <div class="partner-foot">
           <span class="partner-desc">Cordas usadas no Tennis Custom LAB</span>
           <span class="arrow">&rarr;</span>
         </div>
       </a>
-      <a href="https://www.grandslamart.com.br" target="_blank" rel="noopener" class="partner">
+      <a href="https://www.grandslamart.com.br" target="_blank" rel="noopener" class="partner" data-partner="grand_slam_art">
         <img src="./logos/grandslam.png" alt="Grand Slam Art" class="partner-logo" />
         <div class="partner-foot">
           <span class="partner-desc">Quadros e expositores &middot; 5% OFF com TENNISCUSTOM5</span>
           <span class="arrow">&rarr;</span>
         </div>
       </a>
-      <a href="https://www.ersa-stringers.com.br" target="_blank" rel="noopener" class="partner">
+      <a href="https://www.ersa-stringers.com.br" target="_blank" rel="noopener" class="partner" data-partner="ersa">
         <img src="./logos/ersa.png" alt="ERSA South America" class="partner-logo" />
         <div class="partner-foot">
           <span class="partner-desc">Encordoamento e customização profissional</span>
@@ -199,12 +199,29 @@ src="https://www.facebook.com/tr?id=211037735925160&ev=PageView&noscript=1"/></n
       if (isIOS()) { apple.classList.add('featured'); google.classList.add('demoted'); }
       else if (isAndroid()) { google.classList.add('featured'); apple.classList.add('demoted'); }
       function trackStore(store) {
-        if (typeof fbq === 'function') {
-          fbq('track', 'Lead', { content_name: store === 'apple' ? 'App Store click (links)' : 'Google Play click (links)' });
-        }
+        if (typeof fbq !== 'function') return;
+        fbq('track', 'Lead', {
+          content_name: store === 'apple' ? 'App Store click (links)' : 'Google Play click (links)',
+          store: store === 'apple' ? 'ios' : 'android'
+        });
       }
       apple.addEventListener('click', function(){ trackStore('apple'); });
       google.addEventListener('click', function(){ trackStore('google'); });
+
+      Array.prototype.forEach.call(document.querySelectorAll('.partner[data-partner]'), function(el){
+        el.addEventListener('click', function(){
+          if (typeof fbq !== 'function') return;
+          var slug = el.getAttribute('data-partner');
+          fbq('trackCustom', 'PartnerClick', { partner: slug, content_name: slug });
+        });
+      });
+
+      var partnership = document.querySelector('.partnership');
+      if (partnership) {
+        partnership.addEventListener('click', function(){
+          if (typeof fbq === 'function') fbq('trackCustom', 'PartnershipContact');
+        });
+      }
     })();
   </script>
 </body>
